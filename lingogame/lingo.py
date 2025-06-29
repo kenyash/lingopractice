@@ -27,21 +27,29 @@ def display_fl(word):
     first_letter = word[0]
     return first_letter
 
-def get_user_input():
+def get_user_input(generated_word):
     """obtaining user guess with validation checking"""
-    user_guess = input("Welcome to lingo, baby!!!, Please enter a 5 letter word starting with the first letter displayed ")
-    try:
-        if len(user_guess) != 5:
-            raise ValueError("Please enter a input of 5 letters")
-    except ValueError as val :
-        print(val)
+    print("Welcome to lingo, baby!!!")
+    i = 0
+    while i < 5:
+        user_guess = input("Please enter a 5 letter word starting with the first letter displayed")
+        if generated_word == user_guess:
+            print("you guessed correctly")
+            break
+        else:
+            print("Wrong answer guess agian")
+        try:
+            if len(user_guess) != 5:
+                raise ValueError("Please enter a input of 5 letters")
+        except ValueError as val :
+            print(val)
 
-    try:
-        if not user_guess.isalpha():
-            raise TypeError("Please enter letters only")
-    except TypeError as ty:
-        print(ty)
-            
+        try:
+            if not user_guess.isalpha():
+                raise TypeError("Please enter letters only")
+        except TypeError as ty:
+            print(ty)
+        i+=1    
     return user_guess
 
 def compare_input(user_guess, word):
@@ -65,7 +73,7 @@ if __name__ == "__main__":
     low = csv_list()
     word = return_random_word(low)
     print(word)
-    ug = get_user_input()
+    ug = get_user_input(word)
     compare_input(ug, word)
     #compare_input(user_guess, word)
     
